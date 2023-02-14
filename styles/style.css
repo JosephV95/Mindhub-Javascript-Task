@@ -5,7 +5,15 @@ body {
 
 .logo {
     min-width: 15vw;
-    max-width: 20vw;
+    max-width: 15vw;
+}
+
+nav a{
+    font-style: oblique;
+}
+.active{
+    font-size: 1.4rem;
+    font-style:normal ;
 }
 
 #carouselExample {
@@ -51,3 +59,8 @@ footer p{
     text-align: center;
     font-size: 2rem;
 }
+.redes i{
+    padding: 0 1rem;
+    color: white;
+}
+
