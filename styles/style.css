@@ -24,8 +24,23 @@ body {
     height: 12rem;
 }
 
+.form-contact{
+    background-color: rgb(41, 137, 234);
+    margin-top: 1rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    font-weight: bold;
+}
+.btn-form{
+    background-color: rgb(28, 159, 4);
+    border: 2px solid white;
+    border-radius: 1rem;
+    color: white;
+    padding: .2rem 2rem;
+    font-size: 1.4rem;
+}
+
 footer {
-    
     font-size: 1.5rem;
     margin-top: 3rem;
 }
