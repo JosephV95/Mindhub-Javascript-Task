@@ -1,0 +1,38 @@
+body {
+    background: #009FFF;
+    background: linear-gradient(to right, #ec2F4B, #009FFF);
+}
+
+.logo {
+    min-width: 15vw;
+    max-width: 20vw;
+}
+
+#carouselExample {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: rgb(255, 0, 0);
+    color: white;
+
+}
+
+.card{
+    color: black;
+}
+.card img{
+    object-fit: cover;
+    height: 12rem;
+}
+
+footer {
+    
+    font-size: 1.5rem;
+    margin-top: 3rem;
+}
+footer p{
+    display: inline-block;
+}
+.redes{
+    text-align: center;
+    font-size: 2rem;
+}
