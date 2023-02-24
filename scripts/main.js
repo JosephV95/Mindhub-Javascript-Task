@@ -1,9 +1,11 @@
 //? Capturamos un nodo del DOM (en el HTML).  
 const contenedor = document.getElementById("contenedor");
 
-let tarjetas = "";
+let tarjetasCargadas = crearCards(data.events);
 
-function agregarCards(dataArray){
+function crearCards(dataArray){
+    let tarjetas = "";
+
     for (let persona of dataArray) {
         tarjetas += `
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
@@ -21,5 +23,5 @@ function agregarCards(dataArray){
 }
 
 //? con innerHTML se le asigna texto html( con innerText solo se le asignaria strings)
-contenedor.innerHTML = agregarCards(data.events);
+contenedor.innerHTML = tarjetasCargadas;
 

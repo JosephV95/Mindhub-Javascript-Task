@@ -5,9 +5,11 @@ const containerPast = document.getElementById("contenedorPast");
 //! fecha a ser comparada con las demas
 const fechaBase = new Date(data.currentDate); 
 
-let cards = "";
+let cardsCargadas = crearCards(data.events);
 
-function agregarCards(unArray){
+function crearCards(unArray){
+    let cards = "";
+
     for (let persona of unArray) {
         if (new Date(persona.date) < fechaBase) {
             cards += ` 
@@ -28,4 +30,4 @@ function agregarCards(unArray){
 }
 
 //?  Le asignamos el valor al template(html)
-containerPast.innerHTML = agregarCards(data.events); 
+containerPast.innerHTML = cardsCargadas
