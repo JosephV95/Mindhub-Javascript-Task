@@ -2,7 +2,6 @@ body {
     background: #009FFF;
     background: linear-gradient(to right, #ec2F4B, #009FFF);
 }
-
 .logo {
     min-width: 15vw;
     max-width: 15vw;
@@ -10,6 +9,9 @@ body {
 
 nav a{
     font-style: oblique;
+}
+.nav-link:hover{
+    color: white;
 }
 .active{
     font-size: 1.4rem;
@@ -38,10 +40,13 @@ nav a{
     /* outline: 5px outset white; */
     transition: transform .4s;
 }
-.card:hover{
-    transform: scale(1.2);
-    z-index: 10;
+@media only screen and (min-width: 430px){
+    .card:hover{
+        transform: scale(1.2);
+        z-index: 10;
+    }
 }
+
 .card .btn:hover{
     background-color: red;
     border-color: orange;
@@ -69,6 +74,7 @@ footer {
     margin-top: 5rem;
     position: fixed;
     bottom: 0;
+    z-index: 30;
 }
 main{
     padding-bottom: 4rem;
@@ -79,10 +85,10 @@ footer p{
 }
 .redes{
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 }
 .redes i{
-    padding: 0 1rem;
+    padding: 0 .5rem;
     color: white;
 }
 

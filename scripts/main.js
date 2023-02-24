@@ -23,8 +23,3 @@ function agregarCards(dataArray){
 //? con innerHTML se le asigna texto html( con innerText solo se le asignaria strings)
 contenedor.innerHTML = agregarCards(data.events);
 
-// let fecha1 = new Date("2022-01-01");
-// let fecha2 = new Date("2022-04-15");
-
-// let fech = fecha1 < fecha2;
-// console.log(fecha1 < fecha2);
