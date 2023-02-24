@@ -51,6 +51,11 @@ nav a{
 footer {
     font-size: 1.5rem;
     margin-top: 3rem;
+    position: fixed;
+    bottom: 0;
+}
+main{
+    padding-bottom: 4rem;
 }
 footer p{
     display: inline-block;
