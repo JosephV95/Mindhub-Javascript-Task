@@ -32,18 +32,18 @@ let cardsCargadas = "";
 
 //! Usando Funciones de Orden Superior en arrays
 let cardsPasadas = data.events.filter(
-  (persona) => new Date(persona.date) < fechaBase
+  (event) => new Date(event.date) < fechaBase
 );
 
 cardsPasadas.forEach(
-  (persona) =>
+  (event) =>
     (cardsCargadas += ` 
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
                 <div class="card" style="width: 20rem; height: 25rem; ">
-                    <img src="${persona.image}" class="card-img-top" alt="imgEvento${persona._id}">
+                    <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
                     <div class="card-body  text-center">
-                        <h4 class="card-title">${persona.name}</h4>
-                        <p class="card-text">${persona.description}</p>
+                        <h4 class="card-title">${event.name}</h4>
+                        <p class="card-text">${event.description}</p>
                         <a href="details.html" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
                     </div>
                 </div>
@@ -53,3 +53,24 @@ cardsPasadas.forEach(
 
 //?  Le asigno el valor al template(html)
 containerPast.innerHTML = cardsCargadas;
+
+// -----------------------------------
+// let palabra = "ju";
+
+let cardsFiltradas = ""
+
+let cardsForSearch = cardsPasadas.filter( event => event.name.toLowerCase().includes(palabra.toLowerCase())).forEach(
+  (event)=> cardsFiltradas += ` 
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
+      <div class="card" style="width: 20rem; height: 25rem; ">
+          <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
+          <div class="card-body  text-center">
+              <h4 class="card-title">${event.name}</h4>
+              <p class="card-text">${event.description}</p>
+              <a href="details.html" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
+          </div>
+      </div>
+  </div>
+</div> `);
+
+containerPast.innerHTML = cardsFiltradas
