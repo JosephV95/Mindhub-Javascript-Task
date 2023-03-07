@@ -41,10 +41,10 @@ nav a{
     transition: transform .4s;
 }
 @media only screen and (min-width: 430px){
-    .card:hover{
+    #card:hover{
         transform: scale(1.2);
         z-index: 10;
-        /* box-shadow: 0 0 10px whitesmoke, 0 0 20px whitesmoke, 0 0 25px whitesmoke; */
+        box-shadow: 0 0 10px whitesmoke, 0 0 20px whitesmoke, 0 0 25px whitesmoke;
     }
 }
 

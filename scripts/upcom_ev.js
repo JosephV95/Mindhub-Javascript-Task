@@ -11,12 +11,13 @@ let cardsFuturas = data.events.filter(event => new Date(event.date) >= fechaBase
 
 cardsFuturas.forEach( event => cardsCargadas += ` 
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-                <div class="card" style="width: 20rem; height: 25rem; ">
+                <div class="card" id="card" style="width: 20rem; height: 27rem; ">
                     <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
                     <div class="card-body  text-center">
                         <h4 class="card-title">${event.name}</h4>
                         <p class="card-text">${event.description}</p>
-                        <a href="details.html" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
+                        <p class="card-text"><b>Date:</b> ${event.date} <b>Price:</b> $${event.price}</p>
+                        <a href="details.html?id=${event._id}" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
                     </div>
                 </div>
             </div>
