@@ -39,7 +39,7 @@ cardsPasadas.forEach(
   (event) =>
     (cardsCargadas += ` 
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-                <div class="card" id="card" style="width: 20rem; height: 27rem; ">
+                <div class="card" id="card" style="max-width: 20rem; height: 27rem; ">
                     <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
                     <div class="card-body  text-center">
                         <h4 class="card-title">${event.name}</h4>

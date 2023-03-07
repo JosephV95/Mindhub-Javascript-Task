@@ -8,8 +8,6 @@ const checkboxes = document.querySelectorAll("input[type=checkbox]")
 let tarjetasCargadas = "";
 let inputData = "";
 
-let checkData = "";
-
 function cargarCards(unArray){
     tarjetasCargadas = "";
 
@@ -43,54 +41,37 @@ formSearch.addEventListener("submit", (event)=> {
     console.log(event);
 })
 
-let cardsparacheckear = [];
-
 //? Filtrado por Checkbox
+let checkboxData = [];
+
 for (const checkbox of checkboxes) {
     checkbox.addEventListener('click', (event) => {
-        let dataCheck = [];
 
         if (event.target.checked ) {
-
-            cardsparacheckear.push(event.target.value)
-            dataCheck = data.events.filter(e => e.category == event.target.value)
-            console.log(cardsparacheckear);
-
-            
-            cargarCards(dataCheck)
-
-            // console.log("esta marcado");
-            // console.log(dataCheck);
-            
-        }else if (!event.target.checked){
-            // cargarCards(data.events)
-
-            dataCheck.splice(dataCheck.indexOf( dataCheck.forEach(event => event.category== event.target.value) , 1) )
+            checkboxData.push(event.target.value)
+        }else {
+            //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
+            checkboxData = checkboxData.filter( ev => ev != event.target.value)
         }
+
+        let cardsCheck = data.events.filter( event => checkboxData.includes(event.category));
+
+        if (checkboxData.length !== 0) {
+            cargarCards(cardsCheck);
+        } else {
+            //? Con esto cargara todas las cards en caso de no haber ningun checkbox marcado
+            cargarCards(data.events);
+        }    
     })    
-    
 }
 
 
 
-// let array = ["sab", "cob", "mob", "kas"]
-// array.sort()
 
-// array.splice(3)
-// ['sab']
-// array
-// (3) ['cob', 'kas', 'mob']
-// 
+
+// let array = ["sab", "cob", "mob", "kas"]
+
 // array.splice(array.indexOf("mob"), 1)
 // ['mob']
-// array
-// (2) ['cob', 'kas']
-
-
-
-
-
-
-
 
 
