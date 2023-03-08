@@ -33,7 +33,7 @@ function cargarCards(unArray) {
         </div>
     </div> `
     });
-
+    
     //?  Le asigno el valor al template(html)
     containerPast.innerHTML = cardsParaCargar;
 }
@@ -50,7 +50,7 @@ inputSearch.addEventListener("change", (e)=>{
 
 formSearch.addEventListener("submit", (event)=>{
     event.preventDefault()
-    console.log(event);
+    // console.log(event);
 })
 
 //? Filtro por Categorias (checkbox)
@@ -66,6 +66,7 @@ for (const checkbox of checkboxes) {
             checkboxData = checkboxData.filter((ev)=> ev != event.target.value);
         }
         // console.log(checkboxData);
+        //!  Creo una variable que filtre las cards de cardsFuturas cuya categoria este incluida en el array checkboxData
         let cardsCheck = cardsPasadas.filter((e)=> checkboxData.includes(e.category))
 
         if (checkboxData.length != 0) {
@@ -75,3 +76,5 @@ for (const checkbox of checkboxes) {
         }
     })
 }
+
+
