@@ -1,77 +1,77 @@
 //? Se capturo el nodo del DOM(en html) a donde se le asignaran las cards
 const containerPast = document.getElementById("contenedorPast");
+const formSearch = document.getElementById("formSearch");
+const inputSearch = document.getElementById("inputSearch");
+
+const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
 //! fecha a ser comparada con las demas
 const fechaBase = new Date(data.currentDate);
 
-// let cardsCargadas = crearCards(data.events);
-
-// function crearCards(unArray){
-//     let cards = "";
-
-//     for (let persona of unArray) {
-//         if (new Date(persona.date) < new Date(data.currentDate)) {
-//             cards += `
-//             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-//                 <div class="card" style="width: 20rem; height: 25rem; ">
-//                     <img src="${persona.image}" class="card-img-top" alt="...">
-//                     <div class="card-body  text-center">
-//                         <h4 class="card-title">${persona.name}</h4>
-//                         <p class="card-text">${persona.description}</p>
-//                         <a href="details.html" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div> `
-//         }
-//     }
-//     return cards;
-// }
-
-let cardsCargadas = "";
-
 //! Usando Funciones de Orden Superior en arrays
 let cardsPasadas = data.events.filter(
-  (event) => new Date(event.date) < fechaBase
+    (event) => new Date(event.date) < fechaBase
 );
 
-cardsPasadas.forEach(
-  (event) =>
-    (cardsCargadas += ` 
-            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-                <div class="card" id="card" style="max-width: 20rem; height: 27rem; ">
-                    <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
-                    <div class="card-body  text-center">
-                        <h4 class="card-title">${event.name}</h4>
-                        <p class="card-text">${event.description}</p>
-                        <p class="card-text"><b>Date:</b> ${event.date} <b>Price:</b> $${event.price}</p>
-                        <a href="details.html?id=${event._id}" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
-                    </div>
-                </div>
+let cardsParaCargar = "";
+
+function cargarCards(unArray) {
+    //? Debo settear la variable como vacia para que los filtros carguen las cards y que no las dupliquen al filtrar
+    cardsParaCargar = "";
+
+    unArray.forEach(event => { 
+        cardsParaCargar += ` 
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
+        <div class="card" id="card" style="max-width: 20rem; height: 27rem; ">
+            <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
+            <div class="card-body  text-center">
+                <h4 class="card-title">${event.name}</h4>
+                <p class="card-text">${event.description}</p>
+                <p class="card-text"><b>Date:</b> ${event.date} <b>Price:</b> $${event.price}</p>
+                <a href="details.html?id=${event._id}" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
             </div>
-        </div> `)
-);
+        </div>
+    </div> `
+    });
 
-//?  Le asigno el valor al template(html)
-containerPast.innerHTML = cardsCargadas;
+    //?  Le asigno el valor al template(html)
+    containerPast.innerHTML = cardsParaCargar;
+}
 
-// -----------------------------------
-// let palabra = "ju";
+cargarCards(cardsPasadas);
 
-let cardsFiltradas = ""
+//? Filtro por Search
+let inputData = "";
+inputSearch.addEventListener("change", (e)=>{
+    inputData = e.target.value;
+    let filtroSearch = cardsPasadas.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
+    cargarCards(filtroSearch);
+})    
 
-let cardsForSearch = cardsPasadas.filter( event => event.name.toLowerCase().includes(palabra.toLowerCase())).forEach(
-  (event)=> cardsFiltradas += ` 
-  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-      <div class="card" style="width: 20rem; height: 25rem; ">
-          <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
-          <div class="card-body  text-center">
-              <h4 class="card-title">${event.name}</h4>
-              <p class="card-text">${event.description}</p>
-              <a href="details.html" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
-          </div>
-      </div>
-  </div>
-</div> `);
+formSearch.addEventListener("submit", (event)=>{
+    event.preventDefault()
+    console.log(event);
+})
 
-containerPast.innerHTML = cardsFiltradas
+//? Filtro por Categorias (checkbox)
+let checkboxData = [];
+
+for (const checkbox of checkboxes) {
+    checkbox.addEventListener("click", (event)=>{
+
+        if (event.target.checked) {
+            checkboxData.push(event.target.value);
+        } else {
+            //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
+            checkboxData = checkboxData.filter((ev)=> ev != event.target.value);
+        }
+        // console.log(checkboxData);
+        let cardsCheck = cardsPasadas.filter((e)=> checkboxData.includes(e.category))
+
+        if (checkboxData.length != 0) {
+            cargarCards(cardsCheck);
+        } else {
+            cargarCards(cardsPasadas);
+        }
+    })
+}
