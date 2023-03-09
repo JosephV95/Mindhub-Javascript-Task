@@ -1,9 +1,8 @@
 //? Capturamos un nodo del DOM (en el HTML).  
 const contenedor = document.getElementById("contenedor");
+const containerCheck = document.getElementById("containerChecks");
 const formSearch = document.getElementById("formSearch");
 const inputSearch = document.getElementById("inputSearch");
-
-const checkboxes = document.querySelectorAll("input[type=checkbox]")
 
 let tarjetasCargadas = "";
 let inputData = "";
@@ -29,6 +28,23 @@ function cargarCards(unArray){
 
 cargarCards(data.events)
 
+//* Cargar los checkbox de forma dinamica
+let arrayCheckbox = [];
+data.events.forEach(elem => {
+    if (!arrayCheckbox.includes(elem.category)) {
+        arrayCheckbox.push(elem.category)
+    }
+});
+// console.log(arrayCheckbox);
+let cargarChecks = ""
+arrayCheckbox.forEach(check => {
+    cargarChecks += `<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox${arrayCheckbox.indexOf(check)}" value="${check}">
+    <label class="form-check-label" for="inlineCheckbox${arrayCheckbox.indexOf(check)}">${check}</label>
+</div>`
+});
+containerCheck.innerHTML =cargarChecks;
+
 //?  Para filtrar las Cards por el Buscador
 inputSearch.addEventListener("keyup", (event) =>{
     inputData = event.target.value
@@ -42,6 +58,8 @@ formSearch.addEventListener("submit", (event)=> {
 })
 
 //? Filtrado por Checkbox
+const checkboxes = document.querySelectorAll("input[type=checkbox]")
+
 let checkboxData = [];
 
 for (const checkbox of checkboxes) {
@@ -58,9 +76,23 @@ for (const checkbox of checkboxes) {
 
         if (checkboxData.length !== 0) {
             cargarCards(cardsCheck);
+
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+            inputSearch.addEventListener("keyup", (event) =>{
+                inputData = event.target.value
+                let filtroSearch = cardsCheck.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+                cargarCards(filtroSearch)
+            })
         } else {
             //? Con esto cargara todas las cards en caso de no haber ningun checkbox marcado
             cargarCards(data.events);
+
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+            inputSearch.addEventListener("keyup", (event) =>{
+                inputData = event.target.value
+                let filtroSearch = data.events.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+                cargarCards(filtroSearch)
+            })
         }    
     })    
 }
@@ -69,9 +101,8 @@ for (const checkbox of checkboxes) {
 
 
 
-// let array = ["sab", "cob", "mob", "kas"]
 
-// array.splice(array.indexOf("mob"), 1)
-// ['mob']
+
+
 
 

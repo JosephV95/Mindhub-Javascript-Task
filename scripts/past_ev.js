@@ -1,9 +1,8 @@
 //? Se capturo el nodo del DOM(en html) a donde se le asignaran las cards
 const containerPast = document.getElementById("contenedorPast");
+const containerCheck = document.getElementById("containerChecks");
 const formSearch = document.getElementById("formSearch");
 const inputSearch = document.getElementById("inputSearch");
-
-const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
 //! fecha a ser comparada con las demas
 const fechaBase = new Date(data.currentDate);
@@ -40,6 +39,22 @@ function cargarCards(unArray) {
 
 cargarCards(cardsPasadas);
 
+//* Cargar los checkbox de forma dinamica
+let arrayCheckbox = [];
+data.events.forEach(elem => {
+    if (!arrayCheckbox.includes(elem.category)) {
+        arrayCheckbox.push(elem.category)
+    }
+});
+let cargarChecks = ""
+arrayCheckbox.forEach(check => {
+    cargarChecks += `<div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" id="inlineCheckbox${arrayCheckbox.indexOf(check)}" value="${check}">
+    <label class="form-check-label" for="inlineCheckbox${arrayCheckbox.indexOf(check)}">${check}</label>
+</div>`
+});
+containerCheck.innerHTML =cargarChecks;
+
 //? Filtro por Search
 let inputData = "";
 inputSearch.addEventListener("change", (e)=>{
@@ -54,6 +69,8 @@ formSearch.addEventListener("submit", (event)=>{
 })
 
 //? Filtro por Categorias (checkbox)
+const checkboxes = document.querySelectorAll("input[type=checkbox]");
+
 let checkboxData = [];
 
 for (const checkbox of checkboxes) {
@@ -71,8 +88,25 @@ for (const checkbox of checkboxes) {
 
         if (checkboxData.length != 0) {
             cargarCards(cardsCheck);
+
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+            let inputData = "";
+            inputSearch.addEventListener("change", (e)=>{
+                inputData = e.target.value;
+                let filtroSearch = cardsCheck.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
+                cargarCards(filtroSearch);
+})
         } else {
+            //? Cargara todas las cards en caso de no haber ningun checkbox marcado
             cargarCards(cardsPasadas);
+
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+            let inputData = "";
+            inputSearch.addEventListener("change", (e)=>{
+                inputData = e.target.value;
+                let filtroSearch = cardsPasadas.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
+                cargarCards(filtroSearch);
+})
         }
     })
 }
