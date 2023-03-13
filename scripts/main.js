@@ -46,11 +46,14 @@ arrayCheckbox.forEach(check => {
 containerCheck.innerHTML =cargarChecks;
 
 //?  Para filtrar las Cards por el Buscador
-inputSearch.addEventListener("keyup", (event) =>{
-    inputData = event.target.value
-    let filtroSearch = data.events.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
-    cargarCards(filtroSearch)
-})
+function filtrarPorSearch(elArray){
+    inputSearch.addEventListener("keyup", (event) =>{
+        inputData = event.target.value
+        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+        cargarCards(filtroSearch)
+    })
+}
+filtrarPorSearch(data.events)
 
 formSearch.addEventListener("submit", (event)=> {
     event.preventDefault()
@@ -60,39 +63,31 @@ formSearch.addEventListener("submit", (event)=> {
 //? Filtrado por Checkbox
 const checkboxes = document.querySelectorAll("input[type=checkbox]")
 
-let checkboxData = [];
+let categoryCheck = [];
 
 for (const checkbox of checkboxes) {
     checkbox.addEventListener('click', (event) => {
 
         if (event.target.checked ) {
-            checkboxData.push(event.target.value)
+            categoryCheck.push(event.target.value)
         }else {
             //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
-            checkboxData = checkboxData.filter( ev => ev != event.target.value)
+            categoryCheck = categoryCheck.filter( ev => ev != event.target.value)
         }
 
-        let cardsCheck = data.events.filter( event => checkboxData.includes(event.category));
+        let cardsCheck = data.events.filter( event => categoryCheck.includes(event.category));
 
-        if (checkboxData.length !== 0) {
+        if (categoryCheck.length > 0) {
             cargarCards(cardsCheck);
 
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            inputSearch.addEventListener("keyup", (event) =>{
-                inputData = event.target.value
-                let filtroSearch = cardsCheck.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
-                cargarCards(filtroSearch)
-            })
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada, podra buscar entre las check selecionados
+            filtrarPorSearch(cardsCheck);
         } else {
             //? Con esto cargara todas las cards en caso de no haber ningun checkbox marcado
             cargarCards(data.events);
 
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            inputSearch.addEventListener("keyup", (event) =>{
-                inputData = event.target.value
-                let filtroSearch = data.events.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
-                cargarCards(filtroSearch)
-            })
+            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada. podra buscar entre las check selecionados
+            filtrarPorSearch(data.events);
         }    
     })    
 }

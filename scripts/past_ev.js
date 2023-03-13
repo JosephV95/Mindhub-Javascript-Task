@@ -56,12 +56,14 @@ arrayCheckbox.forEach(check => {
 containerCheck.innerHTML =cargarChecks;
 
 //? Filtro por Search
-let inputData = "";
-inputSearch.addEventListener("change", (e)=>{
-    inputData = e.target.value;
-    let filtroSearch = cardsPasadas.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
-    cargarCards(filtroSearch);
-})    
+function filtrarPorSearch(elArray){
+    inputSearch.addEventListener("keyup", (event) =>{
+        inputData = event.target.value
+        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+        cargarCards(filtroSearch)
+    })
+}
+filtrarPorSearch(data.events) 
 
 formSearch.addEventListener("submit", (event)=>{
     event.preventDefault()
@@ -86,27 +88,17 @@ for (const checkbox of checkboxes) {
         //!  Creo una variable que filtre las cards de cardsFuturas cuya categoria este incluida en el array checkboxData
         let cardsCheck = cardsPasadas.filter((e)=> checkboxData.includes(e.category))
 
-        if (checkboxData.length != 0) {
+        if (checkboxData.length > 0) {
             cargarCards(cardsCheck);
 
             //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            let inputData = "";
-            inputSearch.addEventListener("change", (e)=>{
-                inputData = e.target.value;
-                let filtroSearch = cardsCheck.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
-                cargarCards(filtroSearch);
-})
+            filtrarPorSearch(cardsCheck);
         } else {
             //? Cargara todas las cards en caso de no haber ningun checkbox marcado
             cargarCards(cardsPasadas);
 
             //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            let inputData = "";
-            inputSearch.addEventListener("change", (e)=>{
-                inputData = e.target.value;
-                let filtroSearch = cardsPasadas.filter( (e)=> e.name.toLowerCase().includes(inputData.toLowerCase()));
-                cargarCards(filtroSearch);
-})
+            filtrarPorSearch(data.events);
         }
     })
 }

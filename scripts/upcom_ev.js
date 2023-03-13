@@ -53,13 +53,15 @@ arrayCheckbox.forEach(check => {
 containerCheck.innerHTML =cargarChecks;
 
 //? Filtro por Search
-let inputData = "";
+function filtrarPorSearch(elArray){
+    inputSearch.addEventListener("keyup", (event) =>{
+        inputData = event.target.value
+        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+        cargarCards(filtroSearch)
+    })
+}
+filtrarPorSearch(data.events)
 
-inputSearch.addEventListener("change", (event)=> {
-    inputData = event.target.value;
-    let filtroSearch = cardsFuturas.filter((ev)=> ev.name.toLowerCase().includes(inputData.toLowerCase()));
-    cargarCards(filtroSearch);
-})
 formSearch.addEventListener("submit", (event) =>{
     event.preventDefault();
     // console.log(event);
@@ -86,22 +88,12 @@ for (const checkbox of checkboxes) {
             cargarCards(cardsCheck);
 
             //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            let inputData = "";
-            inputSearch.addEventListener("change", (event)=> {
-                inputData = event.target.value;
-                let filtroSearch = cardsCheck.filter((ev)=> ev.name.toLowerCase().includes(inputData.toLowerCase()));
-                cargarCards(filtroSearch);
-})
+            filtrarPorSearch(cardsCheck);
         } else {
             cargarCards(cardsFuturas);
 
             //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            let inputData = "";
-            inputSearch.addEventListener("change", (event)=> {
-                inputData = event.target.value;
-                let filtroSearch = cardsFuturas.filter((ev)=> ev.name.toLowerCase().includes(inputData.toLowerCase()));
-                cargarCards(filtroSearch);
-            })
+            filtrarPorSearch(data.events);
         }
     })
 }
