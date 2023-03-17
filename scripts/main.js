@@ -5,9 +5,43 @@ const formSearch = document.getElementById("formSearch");
 const inputSearch = document.getElementById("inputSearch");
 
 let tarjetasCargadas = "";
-let inputData = "";
+
+let eventos = [];
+let categorias = [];
+
+//! Se cargara las cards desde una API (con asincronismo)
+function traerDatosApi(){
+    // fetch('scripts/amazing_1.json')
+    fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(response => response.json())
+    .then(datosApi => {
+        // console.log(datosApi);
+        eventos = datosApi.events;
+        // console.log(eventos);
+        cargarCards(eventos);
+        //? Cargar las categorias de los checkbox
+        datosApi.events.forEach( elem => {
+            if (!categorias.includes(elem.category)) {
+                categorias.push(elem.category)
+            }
+        })  
+        // console.log(categorias);
+        cargarChecks(categorias);
+
+        filtrarPorSearch(eventos)
+        //* Se llama a la funcion de filtro por categorias para que funcione
+        filtrarPorCategorias(eventos);
+    })
+    .catch(error => console.log(error.messagge))
+    // .finally(console.log(eventos))
+}
+
+traerDatosApi();
 
 function cargarCards(unArray){
+    if (unArray.length == 0) {
+        return contenedor.innerHTML = `<p class='display-5'>No se encontraron elementos</p>`
+    }
     tarjetasCargadas = "";
 
     unArray.forEach(event =>  tarjetasCargadas += `
@@ -25,71 +59,62 @@ function cargarCards(unArray){
 
     contenedor.innerHTML = tarjetasCargadas;
 }
-
-cargarCards(data.events)
-
-//* Cargar los checkbox de forma dinamica
-let arrayCheckbox = [];
-data.events.forEach(elem => {
-    if (!arrayCheckbox.includes(elem.category)) {
-        arrayCheckbox.push(elem.category)
-    }
-});
-// console.log(arrayCheckbox);
-let cargarChecks = ""
-arrayCheckbox.forEach(check => {
-    cargarChecks += `<div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox${arrayCheckbox.indexOf(check)}" value="${check}">
-    <label class="form-check-label" for="inlineCheckbox${arrayCheckbox.indexOf(check)}">${check}</label>
-</div>`
-});
-containerCheck.innerHTML =cargarChecks;
+function cargarChecks(unArray){
+    let checkbox = ""
+    unArray.forEach(elem => {
+        checkbox += `<div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox${unArray.indexOf(elem)}" value="${elem}">
+        <label class="form-check-label" for="inlineCheckbox${unArray.indexOf(elem)}">${elem}</label>
+    </div>`
+    });
+    containerCheck.innerHTML =checkbox;
+}
 
 //?  Para filtrar las Cards por el Buscador
 function filtrarPorSearch(elArray){
-    inputSearch.addEventListener("keyup", (event) =>{
-        inputData = event.target.value
-        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
-        cargarCards(filtroSearch)
+    inputSearch.addEventListener("input", (event) =>{
+        let textoInput = event.target.value;
+        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(textoInput.toLowerCase()));
+        cargarCards(filtroSearch);
     })
 }
-filtrarPorSearch(data.events)
-
+//* Se evita que al pulsar enter en el formSearch se recargue la página
 formSearch.addEventListener("submit", (event)=> {
     event.preventDefault()
     console.log(event);
 })
 
 //? Filtrado por Checkbox
-const checkboxes = document.querySelectorAll("input[type=checkbox]")
+function filtrarPorCategorias(unArray) {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
 
-let categoryCheck = [];
+  let categoryCheck = [];
+  for (const checkbox of checkboxes) {
+    checkbox.addEventListener("click", (event) => {
+      if (event.target.checked) {
+        categoryCheck.push(event.target.value);
+        // console.log(categoryCheck);
+      } else {
+        //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
+        categoryCheck = categoryCheck.filter((ev) => ev != event.target.value);
+        // console.log(categoryCheck);
+      }
 
-for (const checkbox of checkboxes) {
-    checkbox.addEventListener('click', (event) => {
-
-        if (event.target.checked ) {
-            categoryCheck.push(event.target.value)
-        }else {
-            //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
-            categoryCheck = categoryCheck.filter( ev => ev != event.target.value)
-        }
-
-        let cardsCheck = data.events.filter( event => categoryCheck.includes(event.category));
-
-        if (categoryCheck.length > 0) {
-            cargarCards(cardsCheck);
-
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada, podra buscar entre las check selecionados
-            filtrarPorSearch(cardsCheck);
-        } else {
-            //? Con esto cargara todas las cards en caso de no haber ningun checkbox marcado
-            cargarCards(data.events);
-
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada. podra buscar entre las check selecionados
-            filtrarPorSearch(data.events);
-        }    
-    })    
+      let cardsCheck = unArray.filter((event) =>
+        categoryCheck.includes(event.category)
+      );
+      if (categoryCheck.length > 0) {
+        cargarCards(cardsCheck);
+        //* Con esto los filtros por Categoria y Busqueda funcionan de forma combinada, podra buscar entre las check selecionados
+        filtrarPorSearch(cardsCheck);
+      } else {
+        //? Con esto cargara todas las cards en caso de no haber ningun checkbox marcado
+        cargarCards(unArray);
+        //* Con esto los filtros por Categoria y Busqueda funcionan de forma combinada. podra buscar entre las check selecionados
+        filtrarPorSearch(unArray);
+      }
+    });
+  }
 }
 
 
