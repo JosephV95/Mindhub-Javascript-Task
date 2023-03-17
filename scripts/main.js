@@ -93,12 +93,11 @@ function filtrarPorCategorias(unArray) {
     checkbox.addEventListener("click", (event) => {
       if (event.target.checked) {
         categoryCheck.push(event.target.value);
-        // console.log(categoryCheck);
       } else {
         //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
         categoryCheck = categoryCheck.filter((ev) => ev != event.target.value);
-        // console.log(categoryCheck);
       }
+      // console.log(categoryCheck);
 
       let cardsCheck = unArray.filter((event) =>
         categoryCheck.includes(event.category)
