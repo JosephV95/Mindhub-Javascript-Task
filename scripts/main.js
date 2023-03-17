@@ -26,7 +26,7 @@ function traerDatosApi(){
             }
         })  
         // console.log(categorias);
-        cargarChecks(categorias);
+        cargarChecks(categorias.sort());
 
         filtrarPorSearch(eventos)
         //* Se llama a la funcion de filtro por categorias para que funcione
@@ -40,13 +40,13 @@ traerDatosApi();
 
 function cargarCards(unArray){
     if (unArray.length == 0) {
-        return contenedor.innerHTML = `<p class='display-5'>No se encontraron elementos</p>`
+        return contenedor.innerHTML = `<p class='display-4 text-center'><b>No se encontraron elementos.</b></p>`
     }
     tarjetasCargadas = "";
 
     unArray.forEach(event =>  tarjetasCargadas += `
     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-        <div class="card " id="card" style="max-width: 20rem; height: 27rem; ">
+        <div class="card " id="card" style="max-width: 20rem; height: 28rem; ">
             <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
             <div class="card-body text-center" style="position: relative";>
                 <h4 class="card-title">${event.name}</h4>

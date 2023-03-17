@@ -4,63 +4,80 @@ const containerCheck = document.getElementById("containerChecks");
 const formSearch = document.getElementById("formSearch");
 const inputSearch = document.getElementById("inputSearch");
 
-//! fecha a ser comparada con las demas
-const fechaBase = new Date(data.currentDate);
-
-//! Usando Funciones de Orden Superior en arrays
-let cardsFuturas = data.events.filter( (event) => new Date(event.date) >= fechaBase);
-
 let cardsParaCargar = "";
+let eventosFuturos = [];
+let categorias = [];
 
-function cargarCards(unArray) {
-  //? Debo settear la variable como vacia para que los filtros carguen las cards y que no las dupliquen al filtrar
-  cardsParaCargar = "";
+function traerDatosApi(){
+    // fetch('scripts/amazing_1.json')
+    fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(response => response.json())
+    .then(datosApi => {
+        filtrarEventosFuturos(datosApi)
+        // console.log(eventosFuturos);
+        eventosFuturos.forEach(elem => {
+            if (!categorias.includes(elem.category)) {
+                categorias.push(elem.category)
+            }
+        }) 
+        cargarChecks(categorias.sort());
 
-  unArray.forEach((event) => {
-    cardsParaCargar += ` 
-        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
-            <div class="card" id="card" style="max-width: 20rem; height: 27rem; ">
-                <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
-                <div class="card-body  text-center">
-                    <h4 class="card-title">${event.name}</h4>
-                    <p class="card-text">${event.description}</p>
-                    <p class="card-text"><b>Date:</b> ${event.date} <b>Price:</b> $${event.price}</p>
-                    <a href="details.html?id=${event._id}" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
-                </div>
-            </div>
-        </div> `;
-  });
-  //?  Le asignamos el valor al template(html)
-  containerUp.innerHTML = cardsParaCargar;
+        filtrarPorSearch(eventosFuturos);
+        filtrarPorCategorias(eventosFuturos);
+    })
 }
+traerDatosApi();
 
-cargarCards(cardsFuturas);
-
-//* Cargar los checkbox de forma dinamica
-let arrayCheckbox = [];
-data.events.forEach(elem => {
-    if (!arrayCheckbox.includes(elem.category)) {
-        arrayCheckbox.push(elem.category)
+function filtrarEventosFuturos(unArray){
+    eventosFuturos = unArray.events.filter(
+        (event) => new Date(event.date) >= new Date(unArray.currentDate)
+    );
+    // console.log(eventosFuturos);
+    cargarCards(eventosFuturos)
+}
+function cargarCards(unArray) {
+    if (unArray.length == 0) {
+        return containerUp.innerHTML = `<p class='display-4 text-center'><b>No se encontraron elementos.</b></p>`
     }
-});
-let cargarChecks = ""
-arrayCheckbox.forEach(check => {
-    cargarChecks += `<div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox${arrayCheckbox.indexOf(check)}" value="${check}">
-    <label class="form-check-label" for="inlineCheckbox${arrayCheckbox.indexOf(check)}">${check}</label>
-</div>`
-});
-containerCheck.innerHTML =cargarChecks;
+    //? Debo settear la variable como vacia para que los filtros carguen las cards y que no las dupliquen al filtrar
+    cardsParaCargar = "";
+
+    unArray.forEach(event => { 
+        cardsParaCargar += ` 
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
+        <div class="card" id="card" style="max-width: 20rem; height: 28rem; ">
+            <img src="${event.image}" class="card-img-top" alt="imgEvento${event._id}">
+            <div class="card-body  text-center">
+                <h4 class="card-title">${event.name}</h4>
+                <p class="card-text">${event.description}</p>
+                <p class="card-text"><b>Date:</b> ${event.date} <b>Price:</b> $${event.price}</p>
+                <a href="details.html?id=${event._id}" class="btn btn-primary"  style="position: absolute; bottom:1rem; margin-left: -2rem;">Details</a>
+            </div>
+        </div>
+    </div> `
+    });  
+    //?  Le asigno el valor al template(html)
+    containerUp.innerHTML = cardsParaCargar;
+}
+function cargarChecks(unArray){
+    let checkbox = ""
+    unArray.forEach(elem => {
+        checkbox += `<div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox${unArray.indexOf(elem)}" value="${elem}">
+        <label class="form-check-label" for="inlineCheckbox${unArray.indexOf(elem)}">${elem}</label>
+    </div>`
+    });
+    containerCheck.innerHTML =checkbox;
+}
 
 //? Filtro por Search
 function filtrarPorSearch(elArray){
     inputSearch.addEventListener("keyup", (event) =>{
-        inputData = event.target.value
-        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(inputData.toLowerCase()));  
+        let textoInput = event.target.value;
+        let filtroSearch = elArray.filter( ev => ev.name.toLowerCase().includes(textoInput.toLowerCase()));  
         cargarCards(filtroSearch)
     })
 }
-filtrarPorSearch(data.events)
 
 formSearch.addEventListener("submit", (event) =>{
     event.preventDefault();
@@ -68,34 +85,35 @@ formSearch.addEventListener("submit", (event) =>{
 })
 
 //? Filtro por Categorias (checkbox)
-const checkboxes = document.querySelectorAll("input[type=checkbox]");
-
-let checkboxData = [];
-
-for (const checkbox of checkboxes) {
-    checkbox.addEventListener("click", (event) =>{
+function filtrarPorCategorias(unArray) {
+    const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  
+    let categoryCheck = [];
+    for (const checkbox of checkboxes) {
+      checkbox.addEventListener("click", (event) => {
         if (event.target.checked) {
-            checkboxData.push(event.target.value);
+          categoryCheck.push(event.target.value);
         } else {
-            //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
-            checkboxData = checkboxData.filter((ev) => ev != event.target.value);
+          //todo    Con el filter elimino del array los value que no estan cheked (es decir filtro solo los value cheked)
+          categoryCheck = categoryCheck.filter((ev) => ev != event.target.value);
         }
         // console.log(checkboxData);
         //!  Creo una variable que filtre las cards de cardsFuturas cuya categoria este incluida en el array checkboxData
-        let cardsCheck = cardsFuturas.filter((e) => checkboxData.includes(e.category));
-
-        if (checkboxData.length != 0) {
-            cargarCards(cardsCheck);
-
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            filtrarPorSearch(cardsCheck);
+        let cardsCheck = unArray.filter((evn) => categoryCheck.includes(evn.category));
+  
+        if (categoryCheck.length > 0) {
+          cargarCards(cardsCheck);
+          //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+          filtrarPorSearch(cardsCheck);
         } else {
-            cargarCards(cardsFuturas);
-
-            //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
-            filtrarPorSearch(data.events);
+          //? Cargara todas las cards en caso de no haber ningun checkbox marcado
+          cargarCards(unArray);
+  
+          //* Con esto los filtros por Categoria y Busqueda podran funcionar de manera combinada podra buscar entre las check selecionados
+          filtrarPorSearch(unArray);
         }
-    })
-}
+      });
+    }
+  }
 
 
