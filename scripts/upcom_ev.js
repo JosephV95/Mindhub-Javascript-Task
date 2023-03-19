@@ -25,6 +25,7 @@ function traerDatosApi(){
         filtrarPorSearch(eventosFuturos);
         filtrarPorCategorias(eventosFuturos);
     })
+    .catch(error => console.log(error.messagge))
 }
 traerDatosApi();
 
