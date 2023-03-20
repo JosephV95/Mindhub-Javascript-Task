@@ -34,6 +34,7 @@ function cargarCardDetail(eventoDetail){
                 <p class="card-text"><b><u>Date</u>:</b> ${eventoDetail.date}</p>
                 <p class="card-text"><b><u>Price</u>:</b> $${eventoDetail.price}</p>
                 <p class="card-text"><b><u>Capacity</u>:</b> ${eventoDetail.capacity} people</p>
+                <p class="card-text"><b><u>Assistance</u>:</b> ${eventoDetail.assistance} </p>
                 <p class="card-text"><b><u>Estimate</u>:</b> ${eventoDetail.estimate} </p>
                 <p class="card-text"><b><u>Category</u>:</b> ${eventoDetail.category}</p>
                 <p class="card-text"><b><u>Place</u>:</b> ${eventoDetail.place}</p>
