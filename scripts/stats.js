@@ -125,8 +125,8 @@ function cargarTablas (array, contenedor){
     return `
       <tr>
         <td class="table-info"><b>${evento.categoria} </b></td>
-        <td class="table-info text-primary-emphasis"><b>$${evento.ganancias} </b></td>
-        <td class="table-info text-secondary"><b>${evento.porcentAsis.toFixed(2)}% </b></td>
+        <td class="table-info text-success text-end"><b>$${evento.ganancias} </b></td>
+        <td class="table-info text-primary text-end"><b>${evento.porcentAsis.toFixed(2)}% </b></td>
       </tr>  `
   })
 
