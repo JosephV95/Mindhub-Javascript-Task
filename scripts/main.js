@@ -40,7 +40,7 @@ traerDatosApi();
 
 function cargarCards(unArray){
     if (unArray.length == 0) {
-        return contenedor.innerHTML = `<p class='display-4 text-center'><b>No se encontraron elementos.</b></p>`
+        return contenedor.innerHTML = `<p class='display-4 text-center'><b>The word "${inputSearch.value}" was not found.</b></p>`
     }
     tarjetasCargadas = "";
 

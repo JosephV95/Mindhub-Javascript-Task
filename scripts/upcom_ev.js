@@ -38,7 +38,7 @@ function filtrarEventosFuturos(unArray){
 }
 function cargarCards(unArray) {
     if (unArray.length == 0) {
-        return containerUp.innerHTML = `<p class='display-4 text-center'><b>No se encontraron elementos.</b></p>`
+        return containerUp.innerHTML = `<p class='display-4 text-center'><b>The word "${inputSearch.value}" was not found.</b></p>`
     }
     //? Debo settear la variable como vacia para que los filtros carguen las cards y que no las dupliquen al filtrar
     cardsParaCargar = "";
