@@ -50,8 +50,9 @@ nav a{
 
 .card .btn:hover{
     background-color: red;
-    border-color: orange;
-    transform: scale(1.2);
+    border-color: rgb(196, 5, 5);
+    color: white;
+    /* transform: scale(1.2); */
 }
 
 .form-contact{

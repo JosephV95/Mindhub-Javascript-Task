@@ -20,6 +20,11 @@ function traerDatosApi(){
 }
 traerDatosApi()
 
+// funcion para volver a la pagina anterior
+function volverAtras(){
+  window.history.back()
+}
+
 function cargarCardDetail(eventoDetail){
   return divDetail.innerHTML = `
         <div class="card border-primary bg-black text-white mb-3 mt-3 p-3" style="max-width: 100%; font-size: 1.2rem; font-family: 'Caveat', cursive;">
@@ -38,7 +43,7 @@ function cargarCardDetail(eventoDetail){
                 <p class="card-text"><b><u>Estimate</u>:</b> ${eventoDetail.estimate} </p>
                 <p class="card-text"><b><u>Category</u>:</b> ${eventoDetail.category}</p>
                 <p class="card-text"><b><u>Place</u>:</b> ${eventoDetail.place}</p>
-                <a href="index.html" class="card-link">Back to Home</a>
+                <button id="btnDetail" onClick=volverAtras()  type="button" class="btn btn-outline-info"><i class="fa-solid fa-arrow-left fa-fade"> </i> Go back...</button>
               </div>
             </div>
           </div>
