@@ -3,8 +3,10 @@ body {
     background: linear-gradient(to right, #ec2F4B, #009FFF);
 }
 .logo {
-    min-width: 15vw;
-    max-width: 15vw;
+    /* min-width: 15vw;
+    max-width: 15vw; */
+    max-height: 7vh;
+    /* min-height: 3vh; */
 }
 
 nav a{
