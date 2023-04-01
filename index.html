@@ -15,121 +15,151 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-warning ">
-            <div class="container-fluid p-2 ">
-                <img src="assets/Logo_Amazing_Events.png" class="logo rounded float-start ms-4 me-4" alt="logo">
+    <!-- Crea una plantilla de Vue -->
+    <div id="app">
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="upcoming_events.html">Upcoming Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="past_events.html">Past Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="stats.html">Stats</a>
-                        </li>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-warning ">
+                <div class="container-fluid p-2 ">
+                    <img src="assets/Logo_Amazing_Events.png" class="logo rounded float-start ms-4 me-4" alt="logo">
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="upcoming_events.html">Upcoming Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="past_events.html">Past Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="stats.html">Stats</a>
+                            </li>
 
-
-    <main class=" text-white">
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <h2>Home</h2>
-                </div>
-                <div class="carousel-item">
-                    <h2>Upcoming Events</h2>
-                </div>
-                <div class="carousel-item">
-                    <h2>Past Events</h2>
-                </div>
-                <div class="carousel-item">
-                    <h2>Contact</h2>
-                </div>
-                <div class="carousel-item">
-                    <h2>Stats</h2>
-                </div>
-            </div>
-            
-            <a href="stats.html" class="carousel-control-prev" type="button" data-bs-target="" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </a>
-            <a href="upcoming_events.html" class="carousel-control-next" type="button" data-bs-target="" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden"> Next</span>
-            </a>
-
-        </div>
-
-        <section>
-
-            <div class="container-fluid bg-dark">
-                <div class="row p-2 px-5">
-                    <div id="containerChecks"  class="col-xs-12 col-sm-9 col-md-8 col-lg-9  align-self-center">
-                        <!--? Aqui se cargaran las checkbox-->
-                    </div>
-                    <div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
-                        <form id="formSearch" class="d-flex" role="search">
-                            <input id="inputSearch" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-success" typesubmit">Search</button>
-                        </form>
-
+                        </ul>
                     </div>
                 </div>
+            </nav>
+        </header>
+
+        <main class=" text-white">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <h2>Home</h2>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Upcoming Events</h2>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Past Events</h2>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Contact</h2>
+                    </div>
+                    <div class="carousel-item">
+                        <h2>Stats</h2>
+                    </div>
+                </div>
+
+                <a href="stats.html" class="carousel-control-prev" type="button" data-bs-target="" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a href="upcoming_events.html" class="carousel-control-next" type="button" data-bs-target=""
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"> Next</span>
+                </a>
+
             </div>
 
-            <div class="container" >
-                <div id="contenedor" class="row pt-3 gap-3 justify-content-center">
-                    <!--! Aqui iran las Cards -->
+            <section>
+                <div class="container-fluid bg-dark">
+                    <div class="row p-2 px-5">
+                        <div id="containerChecks" class="col-xs-12 col-sm-9 col-md-8 col-lg-9  align-self-center">
+                            <!--? Aqui se cargaran las checkbox-->
+                            <div v-for="categoria of categorias" class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"  v-model="categoriasChecked"
+                                    :id=`Checkbox${categoria}` :value="categoria">
+                                <label class="form-check-label" :for=`Checkbox${categoria}`>{{categoria}}</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
+                            <!-- <form id="formSearch" class="d-flex" role="search"> -->
+                            <input v-model="textoInput" class="form-control me-2" type="text" placeholder="Search"
+                                aria-label="Search">
+
+                            <!--Como no es necesario el boton search, se lo quitara  -->
+                            <!-- <button id="textoInput" class="btn btn-success" type="submit">Search</button> -->
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+                <!--? Se llama en cualquier lado la funcion de filtrado para que se implemente en la página -->
+                {{filtroDoble}}
+                <!-- {{filtroSearch}} -->
+                <!-- {{filtroCategoria}} -->
+
+                <div class="container">
+                    <div id="contenedor" class="row pt-3 gap-3 justify-content-center">
+                        <!--! Aqui iran las Cards -->
+                        <!--* el v-if se mostrara en caso de que la busqueda no coincida -->
+                        <p v-if="eventos.length == 0"  class='display-4 text-center'><b>The word "{{textoInput}}" was not found.</b></p>
+                        <div v-for="evento of eventos" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
+                            <div class="card " id="card" style="max-width: 20rem; height: 28rem; ">
+                                <img :src="evento.image" class="card-img-top" alt="">
+                                <div class="card-body text-center" style="position: relative">
+                                    <h4 class="card-title">{{evento.name}} </h4>
+                                    <p class="card-text">{{evento.description}}</p>
+                                    <p class="card-text"><b>Date:</b> {{evento.date}} <b>Price:</b> ${{evento.price}}
+                                    </p>
+                                    <a :href=`details.html?id=${evento._id}` class="btn btn-primary"
+                                        style="position: absolute; bottom: .6rem; margin-left: -2rem;">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+        <footer class="container-fluid">
+            <div class="row bg-primary align-items-center">
+                <div class="col-4 redes">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-square-facebook"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="col-8">
+                    <i class="fa-regular fa-copyright">
+                        2023 - Amazing Events
+                    </i>
                 </div>
             </div>
+        </footer>
 
-        </section>
-    </main>
-    <footer class="container-fluid">
-        <div class="row bg-primary align-items-center">
-            <div class="col-4 redes">
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-square-facebook"></i>
-                <i class="fa-brands fa-whatsapp"></i>
-            </div>
-            <div class="col-8">
-                <i class="fa-regular fa-copyright">
-                    2023 - Amazing Events
-                </i>
-            </div>
-        </div>
-    </footer>
-
-
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-
     <script src="https://kit.fontawesome.com/0d5c6c5c90.js" crossorigin="anonymous"></script>
 
-    <script src="scripts/data.js"></script>
+    <!-- CDN DE Vue.js -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- <script src="scripts/data.js"></script> -->
     <script src="scripts/main.js"></script>
 </body>
 
