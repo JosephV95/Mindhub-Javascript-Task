@@ -4,6 +4,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      // urlApi: 'https://mindhub-xj03.onrender.com/api/amazing',
       urlApi: "scripts/amazing_1.json",
       eventos: [],
       backupEventos: [],
@@ -22,8 +23,8 @@ createApp({
         .then(datosApi => {
           // console.log(datosApi.events);
           this.eventos = datosApi.events;
-          console.log(this.eventos);
-        //* El backup guardara los eventos iniciales para que al modificar el array "eventos" no se pierda la informacion // 
+          // console.log(this.eventos);
+        //* El backup guardara los eventos iniciales para que al modificar el array "eventos" no se pierda la información
           this.backupEventos = this.eventos
 
           this.traerCategorias(datosApi.events)
@@ -37,7 +38,7 @@ createApp({
         }
         this.categorias.sort() 
       });
-      console.log(this.categorias); 
+      // console.log(this.categorias); 
     },
   },
   computed: {
