@@ -117,7 +117,7 @@
                         <p v-if="eventos.length == 0"  class='display-4 text-center'><b>The word "{{textoInput}}" was not found.</b></p>
                         <div v-for="evento of eventos" class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-3">
                             <div class="card " id="card" style="max-width: 20rem; height: 28rem; ">
-                                <img :src="evento.image" class="card-img-top" alt="">
+                                <img :src="evento.image" class="card-img-top" :alt="evento.name">
                                 <div class="card-body text-center" style="position: relative">
                                     <h4 class="card-title">{{evento.name}} </h4>
                                     <p class="card-text">{{evento.description}}</p>
