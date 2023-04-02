@@ -22,7 +22,7 @@ createApp({
       fetch(this.urlApi)
         .then((response) => response.json())
         .then((datosApi) => {
-          console.log(datosApi);
+          // console.log(datosApi);
           this.eventos = this.traerEventosFuturos(datosApi);
           this.backupEventos = this.eventos;
           this.traerCategorias(this.eventos);
@@ -33,7 +33,7 @@ createApp({
       let eventosFuturos = unArray.events.filter(
         (ev) => new Date(ev.date) >= new Date(unArray.currentDate)
       );
-      console.log(eventosFuturos);
+      // console.log(eventosFuturos);
       return eventosFuturos;
     },
     traerCategorias(unArray) {
@@ -43,7 +43,7 @@ createApp({
         }
       });
       this.categorias.sort();
-      console.log(this.categorias);
+      // console.log(this.categorias);
     },
   },
   computed: {
