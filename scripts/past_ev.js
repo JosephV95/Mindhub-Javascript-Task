@@ -22,10 +22,10 @@ createApp({
       fetch(this.urlApi)
         .then((response) => response.json())
         .then((datosApi) => {
-          console.log(datosApi);
+          // console.log(datosApi);
           this.eventos = this.traerEventosPasados(datosApi);
           this.backupEventos = this.eventos
-          console.log(this.eventos);
+          // console.log(this.eventos);
           this.traerCategorias(this.eventos)
         })
         .catch((error) => console.log(error.message));
@@ -43,7 +43,7 @@ createApp({
                 this.categorias.push(ev.category)
             }
         }); 
-        console.log(this.categorias);
+        // console.log(this.categorias);
         this.categorias.sort()
     }
   },
