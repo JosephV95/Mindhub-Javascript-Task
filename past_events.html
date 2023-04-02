@@ -87,9 +87,9 @@
                         <div id="containerChecks" class="col-xs-12 col-sm-9 col-md-8 col-lg-9  align-self-center">
                             <!--? Aqui se cargaran las checkbox-->
                             <div v-for="categoria of categorias" class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" v-model="categoriasChecked"
+                                <input v-model="categoriasChecked" class="form-check-input" type="checkbox" 
                                     :id=`Checkbox${categoria}` :value="categoria">
-                                <label class="form-check-label" :for=`Checkbox${categoria}`>{{categoria}}</label>
+                                <label :for=`Checkbox${categoria}` class="form-check-label">{{categoria}}</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-3 col-md-4 col-lg-3">
