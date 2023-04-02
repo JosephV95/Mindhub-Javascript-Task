@@ -47,5 +47,14 @@ createApp({
         this.categorias.sort()
     }
   },
-  computed: {},
+  computed: {
+    filtroDoble(){
+      let primerFiltro = this.backupEventos.filter(ev => ev.name.toLowerCase().includes(this.textoInput.toLowerCase()))
+      if (this.categoriasChecked.length > 0) {
+        this.eventos = primerFiltro.filter(evento => this.categoriasChecked.includes(evento.category))
+      } else {
+        this.eventos = primerFiltro
+      }
+    }
+  },
 }).mount("#app");
