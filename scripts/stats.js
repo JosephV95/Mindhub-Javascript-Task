@@ -84,7 +84,7 @@ function cargarTabla1() {
   tabla1.innerHTML = ` 
   <td class="table-info"><b>${eventosTabla1.evMayorAsistencia.nombre} (${eventosTabla1.evMayorAsistencia.porcentaje}%) </b></td>
   <td class="table-info"><b>${eventosTabla1.evMenorAsistencia.nombre} (${eventosTabla1.evMenorAsistencia.porcentaje}%) </b></td>
-  <td class="table-info"><b>${eventosTabla1.evMayorCapacidad.nombre} (${eventosTabla1.evMayorCapacidad.capacidad}) </b></td> `;
+  <td class="table-info"><b>${eventosTabla1.evMayorCapacidad.nombre} (${eventosTabla1.evMayorCapacidad.capacidad.toLocaleString('es-AR')}) </b></td> `;
 }
 
 //! tablas 2 y 3
@@ -125,7 +125,7 @@ function cargarTablas (array, contenedor){
     return `
       <tr>
         <td class="table-info"><b>${evento.categoria} </b></td>
-        <td class="table-info text-success text-end"><b>$${evento.ganancias} </b></td>
+        <td class="table-info text-success text-end"><b>$${evento.ganancias.toLocaleString('es-AR')} </b></td>
         <td class="table-info text-primary text-end"><b>${evento.porcentAsis.toFixed(2)}% </b></td>
       </tr>  `
   })
