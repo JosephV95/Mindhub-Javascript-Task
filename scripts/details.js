@@ -21,6 +21,7 @@ createApp({
         .then((datosApi) => {
           console.log(datosApi.events);
           this.evento = datosApi.events.find((ev) => (ev._id == this.idParam));
+          this.evento.toLocaleString('es-AR')
           console.log(this.evento);
         })
         .catch((error) => console.log(error.message));
