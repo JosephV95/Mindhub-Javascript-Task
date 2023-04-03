@@ -101,7 +101,7 @@
                               <p class="card-text"><i>{{evento.description}}</i></p>
                               <p class="card-text"><b><u>Date</u>:</b> {{evento.date}}</p>
                               <p class="card-text"><b><u>Price</u>:</b> ${{evento.price}}</p>
-                              <!--? Con el .toLocaleString('es-AR') o new Intl.NumberFormat('es-AR').format() se coloca el punto en el mil (se cambia al modo de numeración Argentina) -->
+                              <!--? Con el .toLocaleString('es-AR') o new Intl.NumberFormat('es-AR').format() se coloca el punto en el mil (se cambia al modo de numeración Argentina) son metodos de Javascript -->
                               <p  class="card-text"><b><u>Capacity</u>:</b> {{new Intl.NumberFormat('es-AR').format(evento.capacity)}} people.</p>
                               <p v-if="evento.assistance" class="card-text"><b><u>Assistance</u>:</b> {{evento.assistance.toLocaleString('es-AR')}} people. </p>
                               <p v-if="evento.estimate"  class="card-text"><b><u>Estimate</u>:</b> {{evento.estimate.toLocaleString('es-AR')}} people.</p>

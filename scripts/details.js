@@ -11,7 +11,7 @@ createApp({
     };
   },
   created() {
-    console.log(this.idParam);
+    // console.log(this.idParam);
     this.traerDatosApi();
   },
   methods: {
@@ -19,10 +19,9 @@ createApp({
       fetch(this.urlApi)
         .then((response) => response.json())
         .then((datosApi) => {
-          console.log(datosApi.events);
+          // console.log(datosApi.events);
           this.evento = datosApi.events.find((ev) => (ev._id == this.idParam));
-          this.evento.toLocaleString('es-AR')
-          console.log(this.evento);
+          // console.log(this.evento);
         })
         .catch((error) => console.log(error.message));
     },
