@@ -3,14 +3,38 @@ const {createApp} = Vue
 createApp({
   data(){
     return{
-
+      // urlApi: 'https://mindhub-xj03.onrender.com/api/amazing',
+      urlApi: "scripts/amazing_1.json",
+      eventosPasados: [],
+      eventosFuturos: [],
+      infoTabla1: [],
+      infoTabla2: [],
+      infoTabla3: [],
     }
   },
-  created(){},
-  methods:{},
+  created(){
+    this.traerDatosApi()
+  },
+  methods:{
+    traerDatosApi(){
+      fetch(this.urlApi)
+      .then(response => response.json())
+      .then(datosApi => {
+        this.traerEvPasados(datosApi)
+        this.traerEvFuturos(datosApi)
+        console.log(this.eventosPasados);
+        console.log(this.eventosFuturos);
+      })
+    },
+    traerEvPasados(unArray){
+      this.eventosPasados = unArray.events.filter(ev => new Date(ev.date) < new Date(unArray.currentDate))
+    },
+    traerEvFuturos(unArray){
+      this.eventosFuturos = unArray.events.filter(ev => new Date(ev.date) >= new Date(unArray.currentDate))
+    }
+  },
   computed:{}
 }).mount('#app')
-
 
 
 const tabla1 = document.getElementById("tabla1");
