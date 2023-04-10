@@ -1,3 +1,18 @@
+const {createApp} = Vue
+
+createApp({
+  data(){
+    return{
+
+    }
+  },
+  created(){},
+  methods:{},
+  computed:{}
+}).mount('#app')
+
+
+
 const tabla1 = document.getElementById("tabla1");
 
 let eventosPasados = [];
