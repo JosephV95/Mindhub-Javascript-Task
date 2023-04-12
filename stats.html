@@ -75,68 +75,111 @@
                 <span class="visually-hidden"> Next</span>
             </a>
         </div>
-        
-        <div id="app"></div>
+
+        <div id="app">
             <div class="container ">
                 <div class="row">
                     <div class="col-12">
-                        <table class=" table table-bordered border-info mt-3" ">
+                        <table class=" table table-bordered border-info mt-3">
+                            <!-- !  Tabla 1  -->
                             <thead>
                                 <tr>
-                                    <th class="table-warning  text-center text-primary" colspan="3"><h5>Events Statics</h5></th>
+                                    <th class="table-warning  text-center text-primary" colspan="3">
+                                        <h5>Events Statics</h5>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  class="text-center">
+                                    <td class="table-info text-success">
+                                        <h6><i>Events with the highest percentage of attendance</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Events whith the lowest percentage of attendance</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Event with larger capacity</i></h6>
+                                    </td>
+                                </tr>
+                                <tr  class="text-center">
+                                    <!--?  info de tabla 1  -->
+                                    <td class="table-info"><b>{{Tabla1Asistencia[0].nombre}}
+                                            ({{Tabla1Asistencia[0].asistencia}}%)
+                                        </b></td>
+                                    <td class="table-info"><b> {{Tabla1Asistencia[Tabla1Asistencia.length - 1].nombre}}
+                                            ({{Tabla1Asistencia[Tabla1Asistencia.length - 1].asistencia}}%) </b></td>
+                                    <td class="table-info"><b>{{Tabla1Capacidad.name}}
+                                            ({{Tabla1Capacidad.capacidad.toLocaleString(
+                                            "es-AR")}})</b></td>
+                                </tr>
+                            </tbody>
+                            <!--!   Tabla 2  -->
+                            <thead>
+                                <tr>
+                                    <th class="table-warning  text-center text-danger-emphasis" colspan="3">
+                                        <h5>Upcoming events statics by category</h5>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-info text-success"><h6><i>Events with the highest percentage of attendance</i></h6></td>
-                                    <td class="table-info text-success"><h6><i>Events whith the lowest percentage of attendance</i></h6></td>
-                                    <td class="table-info text-success"><h6><i>Event with larger capacity</i></h6></td>
-                                </tr>
-                                <tr id="tabla1">
-                                    <!--  info de tabla 1  -->
-                                    
+                                    <td class="table-info text-success">
+                                        <h6><i>Categories</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Revenues</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Percentage of attendance</i></h6>
+                                    </td>
                                 </tr>
                             </tbody>
+                            <tbody>
+                                <!--?  info de tabla 2  -->
+                                <tr v-for="evento of infoTabla2">
+                                    <td class="table-info"><b>{{evento.categoria}} </b></td>
+                                    <td class="table-info text-success text-end"><b>${{evento.ganancias.toLocaleString("es-AR")}} </b></td>                                                                                        
+                                    <td class="table-info text-primary text-end"><b>{{evento.porcentAsis.toFixed(2)}}% </b></td>
+                                </tr>
+                            </tbody>
+                            <!--!   Tabla 3  -->
                             <thead>
                                 <tr>
-                                    <th class="table-warning  text-center text-danger-emphasis" colspan="3"><h5>Upcoming events statics by category</h5></th>
+                                    <th class="table-warning  text-center text-info-emphasis" colspan="3">
+                                        <h5>Past Events statics by category</h5>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-info text-success"><h6><i>Categories</i></h6></td>
-                                    <td class="table-info text-success"><h6><i>Revenues</i></h6></td>
-                                    <td class="table-info text-success"><h6><i>Percentage of attendance</i></h6></td>
-                                </tr>
-                            </tbody>
-                            <tbody id="tabla2">
-                                    <!--  info de tabla 2  -->
-                                
-                            </tbody>
-                            <tbody>
-                                <tr>
-                                    <th class="table-warning  text-center text-info-emphasis" colspan="3"><h5>Past Events statics by category</h5></th>
+                                    <td class="table-info text-success">
+                                        <h6><i>Categories</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Revenues</i></h6>
+                                    </td>
+                                    <td class="table-info text-success">
+                                        <h6><i>Percentage of attendance</i></h6>
+                                    </td>
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr>
-                                    <td class="table-info  text-success"><h6><i>Categories</i></h6></td>
-                                    <td class="table-info  text-success"><h6><i>Revenues</i></h6></td>
-                                    <td class="table-info  text-success"><h6><i>Percentage of attendance</i></h6></td>
+                                <!--?  info de tabla 3  -->
+                                <tr v-for="evento of infoTabla3">
+                                    <td class="table-info"><b>{{evento.categoria}} </b></td>
+                                    <td class="table-info text-success text-end"><b>${{evento.ganancias.toLocaleString("es-AR")}} </b></td>                                                                                        
+                                    <td class="table-info text-primary text-end"><b>{{evento.porcentAsis.toFixed(2)}}% </b></td>
                                 </tr>
                             </tbody>
-                            <tbody id="tabla3">
-                                <!--  info de tabla 3  -->
-                            
-                            </tbody>
-
                         </table>
+
                     </div>
                 </div>
             </div>
+        </div>
         
     </main>
-   
+
     <footer class="container-fluid">
         <div class="row bg-primary align-items-center">
             <div class="col-4 redes">
@@ -163,7 +206,7 @@
 
     <!-- CDN DE Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
+
     <script src="scripts/stats.js"></script>
 
 
