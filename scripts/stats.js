@@ -7,8 +7,8 @@ createApp({
       urlApi: "scripts/amazing_1.json",
       eventosPasados: [],
       eventosFuturos: [],
-      Tabla1Asistencia: [],
-      Tabla1Capacidad: [],
+      tabla1Asistencia: [],
+      tabla1Capacidad: [],
       infoTabla2: [],
       infoTabla3: [],
     };
@@ -25,9 +25,9 @@ createApp({
           this.traerEvFuturos(datosApi);
           // console.log(this.eventosPasados);
           // console.log(this.eventosFuturos);
-          this.Tabla1Asistencia = this.asistenciaTabla1(this.eventosPasados);
-          // console.log(this.infoTabla1);
-          this.Tabla1Capacidad = this.capacidadTabla1(this.eventosPasados);
+          this.tabla1Asistencia = this.asistenciaTabla1(this.eventosPasados);
+          // console.log(this.tabla1Asistencia);
+          this.tabla1Capacidad = this.capacidadTabla1(this.eventosPasados);
 
           this.infoTabla2 = this.calculosTablas(this.eventosFuturos);
           // console.log(this.infoTabla2);
@@ -51,7 +51,7 @@ createApp({
       const asistenciaT1 = unArray.map((ev) => {
         return {
           asistencia: ((ev.assistance * 100) / ev.capacity).toFixed(2),
-          nombre: ev.name,
+          name: ev.name,
         };
       });
       // console.log(asistenciaT1);

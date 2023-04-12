@@ -103,13 +103,15 @@
                                 </tr>
                                 <tr  class="text-center">
                                     <!--?  info de tabla 1  -->
-                                    <td class="table-info"><b>{{Tabla1Asistencia[0].nombre}}
-                                            ({{Tabla1Asistencia[0].asistencia}}%)
+                                    <td   class="table-info"><b>{{tabla1Asistencia[0].name}}
+                                            ({{tabla1Asistencia[0].asistencia}}%)
                                         </b></td>
-                                    <td class="table-info"><b> {{Tabla1Asistencia[Tabla1Asistencia.length - 1].nombre}}
-                                            ({{Tabla1Asistencia[Tabla1Asistencia.length - 1].asistencia}}%) </b></td>
-                                    <td class="table-info"><b>{{Tabla1Capacidad.name}}
-                                            ({{Tabla1Capacidad.capacidad.toLocaleString(
+
+                                        <!--*   con unArray.length -1 traigo el ultimo elemento del array -->
+                                    <td class="table-info"><b> {{tabla1Asistencia[tabla1Asistencia.length-1].name}} 
+                                            ({{tabla1Asistencia[tabla1Asistencia.length-1].asistencia}}%) </b></td>
+                                    <td class="table-info"><b>{{tabla1Capacidad.name}}
+                                            ({{tabla1Capacidad.capacidad.toLocaleString(
                                             "es-AR")}})</b></td>
                                 </tr>
                             </tbody>
